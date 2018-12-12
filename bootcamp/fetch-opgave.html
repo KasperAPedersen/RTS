@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Fetch Opgave</title>
+    </head>
+    <body>
+        <table id="starwars">
+            <tr>
+                <th>Bday</th>
+                <th>Eye color</th>
+                <th>Gender</th>
+                <th>Hair color</th>
+                <th>Height</th>
+                <th>Homeworld</th>
+                <th>Mass</th>
+                <th>Name</th>
+                <th>Skin color</th>
+            </tr>
+            <script type="text/javascript">
+                fetch('https://swapi.co/api/people/')
+                .then((response) => {
+                    if(response.status != 200) {
+                        throw new Error("Noget gik galt");
+                    }
+                    return response.json();
+                })
+                .then((json) => {
+                    for(let i = 0; i < json.results.length; i++) {
+                        let data = [json.results[i].birth_year, json.results[i].eye_color, json.results[i].gender, json.results[i].hair_color, json.results[i].height, json.results[i].homeworld, json.results[i].mass, json.results[i].name, json.results[i].skin_color];
+                        opretHTML(data);
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+                function opretHTML(data) {
+                    let tableData = "";
+                    for(let x = 0; x < data.length; x++){
+                        tableData += "<td>" + data[x] + "</td>";
+                    }
+                    let tableRow = document.createElement("tr");
+                    tableRow.innerHTML = tableData;
+                    document.getElementById("starwars").appendChild(tableRow);
+                }
+            </script>
+        </table>
+    </body>
+</html>
