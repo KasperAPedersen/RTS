@@ -96,3 +96,21 @@ function opgave7(weight, height){
     if(bmi >= 30 && bmi < 39) console.log("Du er i klassen: fedme med en bmi på: " + bmi);
     if(bmi >= 40) console.log("Du er i klassen: svær fedme med en bmi på: " + bmi);
 }
+
+// Lig eller ulig
+function opgave8(number){
+    if(isNaN(number)) return; // Hvis number ikke er et nummer, return
+    number%2 == 0 ? console.log(0) : console.log(1);
+}
+
+// Roulette Array
+function opgave9(number, array) {
+    if(isNaN(number) || number == undefined) return;
+    if(array == undefined) return;
+    if(number > array.length-1) {
+        number = Math.random() * array.length-1;
+        number = Math.floor(number);
+    }
+    if(number < 0) number = 0;
+    console.log("[" + number +"]" + array[number]);
+}
