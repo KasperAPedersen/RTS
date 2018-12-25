@@ -114,3 +114,28 @@ function opgave9(number, array) {
     if(number < 0) number = 0;
     console.log("[" + number +"]" + array[number]);
 }
+
+// Fjern mellemrum før eller efter en tekste
+function opgave10(text) {
+    let temp = text, frontEnd = false, backEnd = false; // String & boolean
+    let frontChars = new Array(), backChars = new Array(); // Arrays
+    text = text.split(''); // Splitting text into a array
+    for(let i = 0; i < text.length; i++) // For loop
+        (!frontEnd && text[i] == " ") ? frontChars[frontChars.length] = i : frontEnd = true; // If frontEnd is false & the char is a space, add number to array, else set frontEnd true
+
+    for (let i = text.length-1; i >= 0; i--) // For loop
+        (!backEnd && text[i] == " ") ? backChars[backChars.length] = i : backEnd = true; // If backEnd is false & the char is a space, add number to array else set backEnd to true
+
+    for(let i = 0; i < (frontChars.length + backChars.length); i++) // For loop
+        i <= (frontChars.length-1) ? text.splice(0,1) : text.splice(text.length-1, 1); // If i is != array length, delete char from start, else delete char from end.
+
+    console.log("[~] Spacing removed.\nBefore: |" + temp + "|\nAfter: |" + (text = text.join('')) + "|"); // Console log
+}
+
+// Vinkel 360
+function opgave11(number) {
+    if(isNaN(number)) return;
+    while(number >= 360) number = number - 360;
+    while(number < 0) number = number + 360;
+    console.log("[~] Vinkel: " + number);
+};
