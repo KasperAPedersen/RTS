@@ -138,4 +138,46 @@ function opgave11(number) {
     while(number >= 360) number = number - 360;
     while(number < 0) number = number + 360;
     console.log("[~] Vinkel: " + number);
-};
+}
+
+// Fartbøden
+function opgave12(speed1, speed2, work) { // speed1 - hastighedsbegrænsning | speed2 - målt hastighed | work - vejarbejde
+    let workZone = (work != undefined && !isNaN(work) ? work : 1); // Vejarbejde
+    let zone1 = [ [51,59,1000], [60,64,1500], [65, 65,2500], [66,69,2500], [70,79,3000], [80,80,3500], [81,84,3500], [85,89,4000], [90,94,4500], [95,99,5500], [100,100,6000], [101,6000] ]; // 50
+    let zone2 = [ [81,95,1000], [86,103,1500], [104,104,2500], [105,111,2500], [112,127,3000], [128,128,3500], [129,135,3500], [136,139,4000], [140,143,5000], [144,149,5500], [150,151,6000], [152,159,7000], [160,160,8000], [161,8000] ]; // 80
+    let zone3 = [ [111131,1000], [132,139,1500], [140,142,2500], [143,143,3000], [144,149,3000], [150,153,3500], [154,159,4500], [160,164,4500], [165,169,5000], [170,175,5500], [176,179,6000], [180,186,6500], [187,189,7500], [190,197,8000], [198,199,8500], [200,208,9000], [209,209,10500], [210,219,11000], [220,12500] ]; // 110
+    let zone4 = [ [131,139,1000], [140,149,2000], [150,155,2500], [156,159,3000], [160,168,3500], [169,169,4000], [170,179,4500], [180,181,5000], [182,189,5500], [190,194,6000], [195,199,7500], [200,7000] ];
+    let zone;
+    let penalty, penalty1;
+
+    if(speed1 == 50) {
+        zone = zone1;
+    } else if(speed1 == 80) {
+        zone = zone2;
+    } else if(speed1 == 110) {
+        zone = zone3;
+    } else if(speed1 == 130) {
+        zone = zone4;
+    }
+
+    for(let i = 0; i < zone.length; i++) {
+        if( (speed2 >= zone[i][0]) && (speed2 <= zone[i][1]) ) penalty1 = zone[i][2];
+        if( (speed2 >= zone[i][0]) && (i == (zone.length-1)) ) penalty1 = zone[i][1];
+    }
+    if(work == 1) penalty1 = penalty1 * 2;
+    if((((speed1 / 100) * 100) < speed2) && ((speed1 / 100) * 130) >= speed2  ) {
+        penalty = "Fartbøde på " + penalty1 + ".";
+    } else if((((speed1 / 100) * 131) <= speed2) && (((speed1 / 100) * 160) >= speed2)) {
+        penalty = "Fartbøde på " + penalty1 + " samt klip";
+    } else if((((speed1 / 100) * 161) <= speed2) && (((speed1 / 100) * 200) >= speed2)) {
+        penalty = "Fartbøde på " + penalty1 + " samt betinget frakendelse 1";
+    } else if(speed2 >= 160 && speed2 < 200) {
+        penalty = "Fartbøde på " + penalty1 + " samt betinget frakendelse 2";
+    } else if( (speed2 > 100) && (((speed1 / 100) * 201) <= speed2) ) {
+        penalty = "Fartbøde på " + penalty1 + " samt ubetinget frakendelse 1";
+    } else if(speed2 > 200) {
+        penalty = "Fartbøde på " + penalty1 + " samt ubetinget frakendelse 2";
+    }
+    console.log(penalty);
+}
+opgave12(50, 150, 0);
