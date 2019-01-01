@@ -155,7 +155,7 @@ function opgave12(speed1, speed2, work) { // speed1 - hastighedsbegrænsning | s
         if( (speed2 >= zone[i][0]) && (i == (zone.length-1)) ) penalty1 = zone[i][1];
     }
 
-    if(work == 1) penalty1 = penalty1 * 2;
+    if(workZone == 1) penalty1 = penalty1 * 2;
 
     if((((speed1 / 100) * 100) < speed2) && ((speed1 / 100) * 130) >= speed2  ) {
         penalty = "Fartbøde på " + penalty1 + ".";
